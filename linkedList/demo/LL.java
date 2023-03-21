@@ -143,6 +143,31 @@ public class LL{
         System.out.println("END");
     }
 
+    //insert using recursion
+    public void insertRec(int val, int index){
+        //condition to avoid null pointer exception
+        if(index<0||index>size){
+            System.out.println("insertion not possible");
+        }else{
+            head = insertRec(val,index,head);
+        }
+        
+    }
+    // solving via Node return type
+    // at the end head is returned
+    private Node insertRec(int val, int index, Node node){
+        // we are decrementing the index val for each recursive call.
+        // once we reach to desired index we create a node with it's next as the current insertion node and return it.
+        if(index == 0){
+            Node temp = new Node(val,node);
+            size++;
+            return temp;
+        }
+        // the returned node (in case of new node is assigned to prev node as next)
+        node.next = insertRec(val, index-1,node.next);
+        return node;
+    }
+
     public Node getHead(){
         return this.head;
     }
